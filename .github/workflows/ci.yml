@@ -8,7 +8,7 @@ on:
       - "*"
 
 env:
-  SPARK_VERSION: 3.3.0
+  SPARK_VERSION: 3.3.1
   HADOOP_VERSION: 3.3.4
   HIVE_VERSION: 2.3.9
   MAVEN_OPTS: "-Xss256m -Xms4g -Xmx8g -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=1g"
