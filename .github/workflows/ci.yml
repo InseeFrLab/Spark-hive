@@ -30,7 +30,7 @@ jobs:
         run: |
           cd ~/spark && \
           ./dev/make-distribution.sh --name custom-spark --tgz \
-          -Phadoop-provided -Phadoop-cloud -Phive -Phive-thriftserver -Pkubernetes \
+          -Phadoop-provided -Phadoop-cloud -Phive -Phive-thriftserver -Pkubernetes -Pvolcano \
           -Dhadoop.version=${HADOOP_VERSION} -Dhive.version=${HIVE_VERSION}
       - name: Push to S3
         run: |
