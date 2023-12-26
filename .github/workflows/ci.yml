@@ -20,7 +20,7 @@ jobs:
       - run: sudo apt-get update
       - name: Install prerequisites
         run: |
-          sudo apt-get install openjdk-11-jdk wget curl git -y -q
+          sudo apt-get install openjdk-17-jdk wget curl git -y -q
           sudo wget https://dl.min.io/client/mc/release/linux-amd64/mc && \
           sudo chmod +x mc && \
           sudo mv mc /usr/local/bin/mc
