@@ -11,6 +11,7 @@ env:
   SPARK_VERSION: 3.5.0
   HADOOP_VERSION: 3.3.6
   HIVE_VERSION: 2.3.9
+  JAVA_VERSION: 17
   MAVEN_OPTS: "-Xss256m -Xms4g -Xmx8g -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=1g"
 
 jobs:
@@ -20,7 +21,7 @@ jobs:
       - run: sudo apt-get update
       - name: Install prerequisites
         run: |
-          sudo apt-get install openjdk-11-jdk wget curl git -y -q
+          sudo apt-get install openjdk-${JAVA_VERSION}-jdk wget curl git -y -q
           sudo wget https://dl.min.io/client/mc/release/linux-amd64/mc && \
           sudo chmod +x mc && \
           sudo mv mc /usr/local/bin/mc
@@ -35,5 +36,5 @@ jobs:
       - name: Push to S3
         run: |
           mc alias set s3 ${{ secrets.AWS_S3_ENDPOINT }} ${{ secrets.AWS_ACCESS_KEY_ID }} ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          build_name=spark-${SPARK_VERSION}-bin-hadoop-${HADOOP_VERSION}-hive-${HIVE_VERSION}.tgz
+          build_name=spark-${SPARK_VERSION}-bin-hadoop-${HADOOP_VERSION}-hive-${HIVE_VERSION}-java-${JAVA_VERSION}.tgz
           mc cp ~/spark/spark-${SPARK_VERSION}-bin-custom-spark.tgz s3/projet-onyxia/build/spark-hive/${build_name}
