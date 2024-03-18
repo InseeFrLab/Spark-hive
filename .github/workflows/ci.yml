@@ -8,7 +8,7 @@ on:
       - "*"
 
 env:
-  SPARK_VERSION: 3.5.0
+  SPARK_VERSION: 3.5.1
   HADOOP_VERSION: 3.3.6
   HIVE_VERSION: 2.3.9
   JAVA_VERSION: 17
