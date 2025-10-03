@@ -12,7 +12,7 @@ env:
   HADOOP_VERSION: 3.4.1
   HIVE_VERSION: 2.3.9
   JAVA_VERSION: 21
-  MAVEN_OPTS: "-Xss256m -Xms4g -Xmx8g -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=1g -Denforcer.fail=false"
+  MAVEN_OPTS: "-Xss256m -Xms4g -Xmx8g -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=1g"
 
 jobs:
   build:
@@ -29,6 +29,21 @@ jobs:
         run: git clone --depth 1 --branch v${SPARK_VERSION} https://github.com/apache/spark.git ~/spark
       - name: Build Spark from sources
         run: |
+          mkdir -p ~/.m2
+          cat <<EOF > ~/.m2/settings.xml
+          <settings>
+            <mirrors>
+              <!-- Disable Maven’s default HTTP blocker (temporary!) -->
+              <mirror>
+                <id>maven-default-http-blocker</id>
+                <mirrorOf>external:http:*</mirrorOf>
+                <name>Allow HTTP for legacy repos</name>
+                <url>http://0.0.0.0/</url>
+                <blocked>false</blocked>
+              </mirror>
+            </mirrors>
+          </settings>
+          EOF
           cd ~/spark && \
           ./dev/make-distribution.sh --name custom-spark --tgz \
           -Phadoop-provided -Phadoop-cloud -Phive -Phive-thriftserver -Pkubernetes -Pvolcano \
