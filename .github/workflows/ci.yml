@@ -10,7 +10,7 @@ on:
 env:
   SPARK_VERSION: 4.0.1
   HADOOP_VERSION: 3.4.2
-  HIVE_VERSION: 4.0.0
+  HIVE_VERSION: 2.3.10
   JAVA_VERSION: 21
   MAVEN_OPTS: "-Xss256m -Xms4g -Xmx8g -XX:MaxMetaspaceSize=2g -XX:ReservedCodeCacheSize=1g"
 
